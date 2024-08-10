@@ -60,7 +60,16 @@ export const login = async (req, res) => {
       });
     }
 
-    const isPasswordMatch = await bcrypt.compare(password, user.password);
+    console.log("Password type:", typeof password);
+    console.log("Hashed password type:", typeof user.password);
+
+        // Convert password to string
+
+    const plainPassword = String(password);
+    const hashedPassword = String(user.password);
+
+    // Check password match
+    const isPasswordMatch = await bcrypt.compare(plainPassword, hashedPassword);
     if (!isPasswordMatch) {
       return res.status(401).json({
         message: "Incorrect password",
@@ -111,7 +120,7 @@ export const login = async (req, res) => {
   }
 };
 
-export const logout = async () => {
+export const logout = async (req, res) => {
   try {
     return res.status(200).cookie("token", "", { maxAge: 0 }).json({
       message: "Logged out successfully.",
@@ -122,13 +131,17 @@ export const logout = async () => {
   }
 };
 
-export const updateProfile = async () => {
+export const updateProfile = async (req, res) => {
   try {
     const { fullname, email, phoneNumber, bio, skills } = req.body;
 
-    let skillsArray;
-    if (skills) {
-      skillsArray = skills.split(",");
+    let skillsArray = []
+    if (Array.isArray(skills)) {
+      //if skills already an array use directly
+      skillsArray = skills
+    }else if (typeof skills === 'string') {
+      // If skills is a string, split it into an array
+      skillsArray = skills.split(",").map(skills => skills.trim())
     }
 
     const userId = req.id; //middleware authentication
@@ -148,6 +161,9 @@ export const updateProfile = async () => {
     if (bio) user.profile.bio = bio;
     if (skills) user.profile.skills = skillsArray;
 
+    await user.save()
+
+
     user = {
       _id: user._id,
       fullname: user.fullname,
@@ -156,6 +172,7 @@ export const updateProfile = async () => {
       role: user.role,
       profile: user.profile,
     };
+
 
     return res.status(200).json({
       message: "Profile updated successfully",
