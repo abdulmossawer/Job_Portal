@@ -23,10 +23,13 @@ app.use(cors(corsOptions));
 //import the router files
 import  userRoute  from "./routes/user.route.js";
 import companyRouter from './routes/company.route.js'
+import jobRouter from './routes/job.route.js'
 
 //use the routes
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/company", companyRouter)
+app.use("/api/v1/job", jobRouter)
+
 
 const PORT = process.env.PORT || 8000;
 
