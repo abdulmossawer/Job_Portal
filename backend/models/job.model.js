@@ -55,10 +55,12 @@ const jobSchema = new mongoose.Schema(
       required: true,
     },
 
-    applications: {
+    applications: [
+      {
       type: mongoose.Schema.Types.ObjectId,
-      red: "Applications",
-    },
+      ref: "Application",
+    }
+  ],
   },
   { timestamps: true }
 );
