@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../shared/Navbar";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
@@ -19,52 +19,54 @@ const Signup = () => {
     phoneNumber: "",
     password: "",
     role: "",
-    file: "",
-  });
+    file: ""
+});
+const {loading,user} = useSelector(store=>store.auth);
+const dispatch = useDispatch();
+const navigate = useNavigate();
 
-  const { loading } = useSelector((store) => store.auth);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  
-
-  const changeEventHandler = (e) => {
+const changeEventHandler = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
-  };
-
-  const changeFileHandler = (e) => {
+}
+const changeFileHandler = (e) => {
     setInput({ ...input, file: e.target.files?.[0] });
-  };
-
-  const submitHandler = async (e) => {
+}
+const submitHandler = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
+    const formData = new FormData();    //formdata object
     formData.append("fullname", input.fullname);
     formData.append("email", input.email);
     formData.append("phoneNumber", input.phoneNumber);
     formData.append("password", input.password);
     formData.append("role", input.role);
     if (input.file) {
-      formData.append("file", input.file);
+        formData.append("file", input.file);
     }
+
     try {
-      dispatch(setLoading(true));
-      const res = await axios.post(`${USER_API_END_POINT}/register`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        withCredentials: true,
-      });
-      if (res.data.success) {
-        navigate("/login");
-        toast.success(res.data.message);
-      }
+        dispatch(setLoading(true));
+        const res = await axios.post(`${USER_API_END_POINT}/register`, formData, {
+            headers: { 'Content-Type': "multipart/form-data" },
+            withCredentials: true,
+        });
+        if (res.data.success) {
+            navigate("/login");
+            toast.success(res.data.message);
+        }
     } catch (error) {
-      console.log(error);
-      toast.error(error.response?.data?.message || "An error occurred");
-    }finally {
-      dispatch(setLoading(false));
+        console.log(error);
+        toast.error(error.response.data.message);
+    } finally{
+        dispatch(setLoading(false));
     }
-  };
+}
+
+useEffect(()=>{
+  if(user){
+      navigate("/");
+  }
+},[])
+
 
   return (
     <div>

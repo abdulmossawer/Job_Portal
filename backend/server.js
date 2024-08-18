@@ -35,7 +35,7 @@ app.use("/api/v1/application", applicationRouter)
 
 
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   connectDB();
