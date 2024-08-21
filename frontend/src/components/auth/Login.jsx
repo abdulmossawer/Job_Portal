@@ -51,90 +51,92 @@ const Login = () => {
     }
   };
 
-  useEffect(()=>{
-    if(user){
-        navigate("/");
+  useEffect(() => {
+    if (user) {
+      navigate("/");
     }
-},[])
+  }, [user, navigate]);
 
   return (
-    <div>
-      <Navbar />
-      <div className="flex items-center justify-center max-w-7xl mx-auto">
-        <form
-          onSubmit={submitHandler}
-          className="w-1/2 border border-gray-200 rounded-md p-4 my-10"
-        >
-          <h1 className="font-bold text-xl mb-5"> Login </h1>
-
-          <div className="my-2">
-            <Label>Email</Label>
+    <>    <Navbar />
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50">
+      
+      <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
+        <h1 className="text-2xl font-semibold text-gray-800 mb-6">Login</h1>
+        <form onSubmit={submitHandler}>
+          <div className="mb-4">
+            <Label className="block text-sm font-medium text-gray-700">Email</Label>
             <Input
               value={input.email}
               name="email"
               onChange={changeEventHandler}
               type="email"
               placeholder="Enter your Email"
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
             />
           </div>
 
-          <div className="my-2">
-            <Label>Password</Label>
+          <div className="mb-4">
+            <Label className="block text-sm font-medium text-gray-700">Password</Label>
             <Input
               value={input.password}
               name="password"
               onChange={changeEventHandler}
               type="password"
               placeholder="Enter your Password"
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
             />
           </div>
 
-          <div className="flex items-center justify-between">
-            <RadioGroup className="flex items-center gap-4 my-5">
-              <div className="flex items-center space-x-2">
+          <div className="flex items-center mb-4">
+            <RadioGroup className="flex gap-4">
+              <div className="flex items-center">
                 <Input
                   type="radio"
                   name="role"
                   value="student"
                   checked={input.role === "student"}
                   onChange={changeEventHandler}
-                  className="cursor-pointer"
+                  className="mr-2"
                 />
-                <Label htmlFor="r1">Student</Label>
+                <Label htmlFor="r1" className="text-sm">Student</Label>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center">
                 <Input
                   type="radio"
                   name="role"
                   value="recruiter"
                   checked={input.role === "recruiter"}
                   onChange={changeEventHandler}
-                  className="cursor-pointer"
+                  className="mr-2"
                 />
-                <Label htmlFor="r2">Recruiter</Label>
+                <Label htmlFor="r2" className="text-sm">Recruiter</Label>
               </div>
             </RadioGroup>
           </div>
-          {loading ? (
-            <Button className="w-full my-4">
-              {" "}
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait
-            </Button>
-          ) : (
-            <Button type="submit" className="w-full my-4">
-              Login
-            </Button>
-          )}
 
-          <Link to="/signup" className=" ">
-            <span className="text-sm">
-              Don't have an account?{" "}
-              <span className="text-blue-600"> Signup </span>
-            </span>
-          </Link>
+          <Button
+            type="submit"
+            className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg shadow-sm hover:bg-blue-700 transition duration-150"
+          >
+            {loading ? (
+              <>
+                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                Please wait
+              </>
+            ) : (
+              'Login'
+            )}
+          </Button>
+
+          <div className="mt-4 text-center">
+            <Link to="/signup" className="text-blue-600 hover:underline">Don't have an account? Sign up</Link>
+          </div>
         </form>
       </div>
     </div>
+    </>
+
   );
 };
 

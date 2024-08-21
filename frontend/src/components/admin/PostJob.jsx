@@ -18,8 +18,6 @@ import { JOB_API_END_POINT } from "@/utils/constant";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 
-const companyArray = [];
-
 const PostJob = () => {
   const [input, setInput] = useState({
     title: "",
@@ -35,7 +33,6 @@ const PostJob = () => {
 
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
   const { companies } = useSelector((store) => store.company);
 
   const changeEventHandler = (e) => {
@@ -74,12 +71,12 @@ const PostJob = () => {
   return (
     <div>
       <Navbar />
-      <div className="flex items-center justify-center w-screen my-5">
+      <div className="flex items-center justify-center w-full px-4 sm:px-6 lg:px-8 my-5">
         <form
           onSubmit={submitHandler}
-          className="p-8 max-w-4xl border border-gray-200 shadow-lg rounded-md"
+          className="p-6 max-w-lg w-full border border-gray-200 shadow-lg rounded-md"
         >
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 gap-4">
             <div>
               <Label>Title</Label>
               <Input
@@ -137,7 +134,7 @@ const PostJob = () => {
             </div>
 
             <div>
-              <Label>JobType</Label>
+              <Label>Job Type</Label>
               <Input
                 type="text"
                 name="jobType"
@@ -152,7 +149,7 @@ const PostJob = () => {
               <Label>Experience</Label>
               <Input
                 type="number"
-                placeholder="in numbers 1"
+                placeholder="in years"
                 name="experience"
                 value={input.experience}
                 onChange={changeEventHandler}
@@ -170,29 +167,27 @@ const PostJob = () => {
                 className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
               />
             </div>
+            
             {companies.length > 0 && (
-              <Select onValueChange={selectChangeHandler}>
-                <SelectTrigger className="w-[180px]">
+              <Select onValueChange={selectChangeHandler} className="mt-2">
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select a Company" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
-                    {companies.map((company) => {
-                      return (
-                        <SelectItem value={company?.name?.toLowerCase()}>
-                          {company.name}
-                        </SelectItem>
-                      );
-                    })}
+                    {companies.map((company) => (
+                      <SelectItem key={company._id} value={company.name.toLowerCase()}>
+                        {company.name}
+                      </SelectItem>
+                    ))}
                   </SelectGroup>
                 </SelectContent>
               </Select>
             )}
           </div>
           {loading ? (
-            <Button className="w-full my-4">
-              {" "}
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait{" "}
+            <Button className="w-full my-4 flex items-center justify-center">
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait
             </Button>
           ) : (
             <Button type="submit" className="w-full my-4">

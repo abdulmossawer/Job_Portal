@@ -15,13 +15,13 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const CompaniesTable = () => {
-  // const companies = useSelector((store) => store.company.companies);
   const { companies, searchCompanyByText } = useSelector(
     (store) => store.company
   );
   const [filterCompany, setFilterCompany] = useState(companies);
 
   const navigate = useNavigate();
+
   useEffect(() => {
     const filteredCompany =
       companies.length >= 0 &&
@@ -37,7 +37,7 @@ const CompaniesTable = () => {
   }, [companies, searchCompanyByText]);
 
   return (
-    <div>
+    <div className="overflow-x-auto">
       <Table>
         <TableCaption>List of your recent registered companies</TableCaption>
         <TableHeader>
@@ -52,8 +52,6 @@ const CompaniesTable = () => {
           {Array.isArray(companies) ? (
             filterCompany.map((company) => (
               <TableRow key={company.id}>
-                {" "}
-                {/* Add a unique key */}
                 <TableCell>
                   <Avatar>
                     <AvatarImage src={company.logo} />
@@ -61,17 +59,17 @@ const CompaniesTable = () => {
                 </TableCell>
                 <TableCell>{company.name}</TableCell>
                 <TableCell>{company.createdAt.split("T")[0]}</TableCell>
-                <TableCell className="text-right cursor-pointer">
+                <TableCell className="text-right">
                   <Popover>
                     <PopoverTrigger>
-                      <MoreHorizontal />
+                      <MoreHorizontal className="h-4 w-4" />
                     </PopoverTrigger>
                     <PopoverContent className="w-32">
                       <div
                         onClick={() =>
                           navigate(`/admin/companies/${company._id}`)
                         }
-                        className="flex items-center gap-2 w-fit cursor-pointer"
+                        className="flex items-center gap-2 cursor-pointer"
                       >
                         <Edit2 className="w-4" />
                         <span>Edit</span>
