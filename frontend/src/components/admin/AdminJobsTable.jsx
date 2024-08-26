@@ -24,22 +24,22 @@ const AdminJobsTable = () => {
     return (
         <div className="overflow-x-auto">
             <Table>
-                <TableCaption>A list of your recent posted jobs</TableCaption>
+                <TableCaption className="text-white">A list of your recent posted jobs</TableCaption>
                 <TableHeader>
                     <TableRow>
-                        <TableHead>Company Name</TableHead>
-                        <TableHead>Role</TableHead>
-                        <TableHead>Date</TableHead>
-                        <TableHead className="text-right">Action</TableHead>
+                        <TableHead className="text-white">Company Name</TableHead>
+                        <TableHead className="text-white">Role</TableHead>
+                        <TableHead className="text-white">Date</TableHead>
+                        <TableHead className="text-right text-white">Action</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {filterJobs?.map((job) => (
                         <TableRow key={job._id}>
-                            <TableCell>{job?.company?.name}</TableCell>
-                            <TableCell>{job?.title}</TableCell>
-                            <TableCell>{job?.createdAt.split("T")[0]}</TableCell>
-                            <TableCell className="text-right">
+                            <TableCell  className="text-white"> {job?.company?.name}</TableCell>
+                            <TableCell className="text-white">{job?.title}</TableCell>
+                            <TableCell className="text-white">{job?.createdAt.split("T")[0]}</TableCell>
+                            <TableCell className="text-right text-white">
                                 <Popover>
                                     <PopoverTrigger>
                                         <MoreHorizontal className="h-4 w-4 cursor-pointer" />

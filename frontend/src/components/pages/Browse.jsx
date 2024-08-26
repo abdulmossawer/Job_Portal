@@ -20,7 +20,7 @@ const Browse = () => {
         <div>
             <Navbar />
             <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10'>
-                <h1 className='text-2xl font-bold mb-8'>
+                <h1 className='text-2xl font-bold mb-8 text-white'>
                     Search Results ({allJobs.length})
                 </h1>
                 <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>

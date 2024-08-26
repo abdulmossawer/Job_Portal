@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { APPLICATION_API_END_POINT } from '@/utils/constant';
 import { setAllApplicants } from '@/redux/applicationSlice';
+import Footer from '../shared/Footer';
 
 const Applicants = () => {
   const params = useParams();
@@ -27,13 +28,16 @@ const Applicants = () => {
   }, [params.id, dispatch]);
 
   return (
+    <>
     <div>
       <Navbar />
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10'>
-        <h1 className='font-bold text-xl mb-5'>Applicants {applicants?.applications?.length}</h1>
+        <h1 className='font-bold text-xl mb-5 text-white'>Applicants {applicants?.applications?.length}</h1>
         <ApplicantsTable />
       </div>
     </div>
+    <Footer/>
+    </>
   );
 }
 

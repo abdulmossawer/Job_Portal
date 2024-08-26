@@ -37,15 +37,19 @@ const CompaniesTable = () => {
   }, [companies, searchCompanyByText]);
 
   return (
-    <div className="overflow-x-auto">
-      <Table>
-        <TableCaption>List of your recent registered companies</TableCaption>
+    <div className="overflow-x-auto bg-light dark:bg-dark">
+      <Table className="border-light dark:border-dark">
+        <TableCaption className="text-white dark:text-dark">
+          List of your recent registered companies
+        </TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead>Logo</TableHead>
-            <TableHead>Name</TableHead>
-            <TableHead>Date</TableHead>
-            <TableHead className="text-right">Action</TableHead>
+            <TableHead className="text-white dark:text-dark">Logo</TableHead>
+            <TableHead className="text-white dark:text-dark">Name</TableHead>
+            <TableHead className="text-white dark:text-dark">Date</TableHead>
+            <TableHead className="text-right text-white dark:text-dark">
+              Action
+            </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -57,19 +61,21 @@ const CompaniesTable = () => {
                     <AvatarImage src={company.logo} />
                   </Avatar>
                 </TableCell>
-                <TableCell>{company.name}</TableCell>
-                <TableCell>{company.createdAt.split("T")[0]}</TableCell>
+                <TableCell className="text-white dark:text-dark">{company.name}</TableCell>
+                <TableCell className="text-white dark:text-dark">
+                  {company.createdAt.split("T")[0]}
+                </TableCell>
                 <TableCell className="text-right">
                   <Popover>
                     <PopoverTrigger>
-                      <MoreHorizontal className="h-4 w-4" />
+                      <MoreHorizontal className="h-4 w-4 text-white dark:text-dark" />
                     </PopoverTrigger>
-                    <PopoverContent className="w-32">
+                    <PopoverContent className="w-32 bg-white dark:bg-dark">
                       <div
                         onClick={() =>
                           navigate(`/admin/companies/${company._id}`)
                         }
-                        className="flex items-center gap-2 cursor-pointer"
+                        className="flex items-center gap-2 cursor-pointer text-black dark:text-dark"
                       >
                         <Edit2 className="w-4" />
                         <span>Edit</span>
@@ -81,7 +87,9 @@ const CompaniesTable = () => {
             ))
           ) : (
             <TableRow>
-              <TableCell colSpan="4">No companies available</TableCell>
+              <TableCell colSpan="4" className="text-light dark:text-dark">
+                No companies available
+              </TableCell>
             </TableRow>
           )}
         </TableBody>

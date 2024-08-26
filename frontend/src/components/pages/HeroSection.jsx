@@ -18,23 +18,24 @@ const HeroSection = () => {
   return (
     <div className="text-center px-4 md:px-0">
       <div className="flex flex-col gap-5 my-10">
-        <span className="mx-auto px-4 py-2 rounded-full bg-gray-100 text-[#F83002] font-medium text-sm md:text-base">
-          No. 1 Job Hunt Website
+        <span className="mx-auto px-4 py-2 rounded-full bg-gray-800 text-orange-500 font-medium text-sm md:text-base">
+          Premier Job Search Site
         </span>
-        <h1 className="text-3xl md:text-5xl font-bold">
-          Search, Apply & <br /> Get Your <span className="text-[#6A38C2]">Dream Jobs</span>
+        <h1 className="text-3xl md:text-5xl font-bold text-white">
+          Browse, Apply, &<br /> Unlock Your Career Potential! 
+          <span className="text-indigo-400"> Dream Jobs</span>
         </h1>
-        <p className="text-sm md:text-base">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid aspernatur temporibus nihil tempora dolor!
+        <p className="text-sm md:text-base text-gray-300">
+          Discover and apply for exciting job opportunities that match your skills and goals. Start your journey towards your ideal career today!
         </p>
-        <div className="flex w-full md:w-[40%] shadow-lg border border-gray-200 pl-3 rounded-full items-center gap-4 mx-auto">
+        <div className="flex w-full md:w-[40%] shadow-lg border border-gray-600 pl-3 rounded-full items-center gap-4 mx-auto bg-gray-700">
           <input
             type="text"
             placeholder="Find your dream jobs"
             onChange={(e) => setQuery(e.target.value)}
-            className="outline-none border-none w-full text-sm md:text-base"
+            className="outline-none border-none w-full text-sm md:text-base bg-transparent text-white placeholder-gray-400"
           />
-          <Button onClick={searchJobHandler} className="rounded-r-full bg-[#6A38C2]">
+          <Button onClick={searchJobHandler} className="rounded-r-full bg-indigo-600 text-white">
             <Search className="h-5 w-5" />
           </Button>
         </div>

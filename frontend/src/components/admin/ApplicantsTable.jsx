@@ -36,31 +36,31 @@ const ApplicantsTable = () => {
 return (
     <div>
         <Table>
-            <TableCaption>A list of your recent applied user</TableCaption>
+            <TableCaption className="text-white">A list of your recent applied user</TableCaption>
             <TableHeader>
                 <TableRow>
-                    <TableHead>FullName</TableHead>
-                    <TableHead>Email</TableHead>
-                    <TableHead>Contact</TableHead>
-                    <TableHead>Resume</TableHead>
-                    <TableHead>Date</TableHead>
-                    <TableHead className="text-right">Action</TableHead>
+                    <TableHead className="text-white">FullName</TableHead>
+                    <TableHead className="text-white">Email</TableHead>
+                    <TableHead className="text-white">Contact</TableHead>
+                    <TableHead className="text-white">Resume</TableHead>
+                    <TableHead className="text-white">Date</TableHead>
+                    <TableHead className="text-right text-white">Action</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
                 {
                     applicants && applicants?.applications?.map((item) => (
                         <tr key={item._id}>
-                            <TableCell>{item?.applicant?.fullname}</TableCell>
-                            <TableCell>{item?.applicant?.email}</TableCell>
-                            <TableCell>{item?.applicant?.phoneNumber}</TableCell>
-                            <TableCell >
+                            <TableCell className="text-white">{item?.applicant?.fullname}</TableCell>
+                            <TableCell className="text-white">{item?.applicant?.email}</TableCell>
+                            <TableCell className="text-white">{item?.applicant?.phoneNumber}</TableCell>
+                            <TableCell  className="text-white">
                                 {
                                     item.applicant?.profile?.resume ? <a className="text-blue-600 cursor-pointer" href={item?.applicant?.profile?.resume} target="_blank" rel="noopener noreferrer">{item?.applicant?.profile?.resumeOriginalName}</a> : <span>NA</span>
                                 }
                             </TableCell>
-                            <TableCell>{item?.applicant.createdAt.split("T")[0]}</TableCell>
-                            <TableCell className="float-right cursor-pointer">
+                            <TableCell className="text-white">{item?.applicant.createdAt.split("T")[0]}</TableCell>
+                            <TableCell className="float-right cursor-pointer text-white">
                                 <Popover>
                                     <PopoverTrigger>
                                         <MoreHorizontal />
