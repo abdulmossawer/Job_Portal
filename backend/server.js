@@ -20,7 +20,7 @@ console.log(__dirname);
 
 //for cors
 const corsOptions = {
-  origin: 'http://localhost:5173', // Your frontend URL
+  origin: process.env.URL, // Your frontend URL
   credentials: true,
 
 };
