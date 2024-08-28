@@ -4,6 +4,7 @@ import Job from './Job';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchedQuery } from '@/redux/jobSlice';
 import useGetAllJobs from '@/hooks/useGetAllJobs';
+import Footer from '../shared/Footer';
 
 const Browse = () => {
     useGetAllJobs();
@@ -17,6 +18,7 @@ const Browse = () => {
     }, [dispatch]);
 
     return (
+        <>
         <div>
             <Navbar />
             <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10'>
@@ -30,6 +32,8 @@ const Browse = () => {
                 </div>
             </div>
         </div>
+        <Footer/>
+        </>
     );
 };
 

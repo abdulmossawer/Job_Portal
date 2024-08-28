@@ -12,7 +12,6 @@ const category = [
   "Java Developer",
   "Python Developer",
   "MERN Stack Developer",
-  "FULL STACK Developer",
 ];
 
 const CategoryCarousel = () => {
